@@ -25,6 +25,18 @@ public class Price implements PriceInterface {
 
     @Override
     public Currency getCurrency() {
-        return this.getCurrency();
+        return this.currency;
+    }
+
+    @Override
+    public boolean equals(Object another) {
+        if(!(another instanceof PriceInterface)) {
+            return false;
+        }
+
+        PriceInterface another2 = (PriceInterface) another;
+
+        return Double.compare(this.amount, another2.getAmount()) == 0
+                && this.currency.equals(another2.getCurrency());
     }
 }
