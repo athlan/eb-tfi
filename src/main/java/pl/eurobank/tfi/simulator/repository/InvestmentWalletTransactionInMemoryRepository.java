@@ -1,6 +1,7 @@
 package pl.eurobank.tfi.simulator.repository;
 
 import pl.eurobank.tfi.component.investmentfundwallet.domain.*;
+import pl.eurobank.tfi.component.investmentfundwallet.domain.event.InvestmentTransactionEvent;
 import pl.eurobank.tfi.component.investmentfundwallet.repository.InvestmentWalletTransactionRepositoryInterface;
 import pl.eurobank.tfi.component.investmentfundwallet.repository.exception.TransactionNoUnitsInWalletException;
 import pl.eurobank.tfi.component.investmentfundwallet.repository.exception.TransactionNotEnoughAmountInWalletException;
@@ -8,6 +9,7 @@ import pl.eurobank.tfi.component.money.domain.Price;
 import pl.eurobank.tfi.component.money.domain.PriceInterface;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -68,6 +70,9 @@ public class InvestmentWalletTransactionInMemoryRepository implements Investment
         wallet.setAmount(price);
 
         wallet.addEntry(new InvestmentWalletEntry(transaction.getInvestmentFundUnitType(), transaction.getQuantity()));
+
+        InvestmentTransactionEvent event = new InvestmentTransactionEvent(transaction, new Date());
+        // TODO: fire event to event bus.
 
         return transaction;
     }
