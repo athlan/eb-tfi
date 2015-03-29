@@ -16,6 +16,8 @@ public class AbstractInvestmentTransaction implements InvestmentTransactionInter
 
     PriceInterface price;
 
+    PriceInterface priceValue;
+
     Date transactionDate;
 
     public AbstractInvestmentTransaction(InvestmentWalletInterface wallet, InvestmentFundUnitTypeInterface investmentFundUnitType, Long quantity, Date transactionDate) {
@@ -31,6 +33,7 @@ public class AbstractInvestmentTransaction implements InvestmentTransactionInter
         }
 
         this.price = new Price(quantity * currentPricing.getAmount(), currentPricing.getCurrency());
+        this.priceValue = new Price(quantity * currentPricing.getAmount(), currentPricing.getCurrency());
     }
 
     @Override
@@ -56,5 +59,10 @@ public class AbstractInvestmentTransaction implements InvestmentTransactionInter
     @Override
     public PriceInterface getPrice() {
         return price;
+    }
+
+    @Override
+    public PriceInterface getPriceValue() {
+        return priceValue;
     }
 }

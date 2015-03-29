@@ -15,5 +15,7 @@ public interface InvestmentTransactionInterface {
 
     PriceInterface getPrice();
 
+    PriceInterface getPriceValue();
+
     Date getTransactionDate();
 }

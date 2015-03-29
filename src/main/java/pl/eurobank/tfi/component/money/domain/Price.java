@@ -39,4 +39,27 @@ public class Price implements PriceInterface {
         return Double.compare(this.amount, another2.getAmount()) == 0
                 && this.currency.equals(another2.getCurrency());
     }
+
+    @Override
+    public PriceInterface add(PriceInterface price) {
+        if(!this.currency.equals(price.getCurrency())) {
+            throw new IllegalArgumentException("Different currencies");
+        }
+
+        return new Price(this.getAmount() + price.getAmount(), this.getCurrency());
+    }
+
+    @Override
+    public PriceInterface sub(PriceInterface price) {
+        if(!this.currency.equals(price.getCurrency())) {
+            throw new IllegalArgumentException("Different currencies");
+        }
+
+        return new Price(this.getAmount() - price.getAmount(), this.getCurrency());
+    }
+
+    @Override
+    public PriceInterface multiply(double factor) {
+        return new Price(this.getAmount() * factor, this.getCurrency());
+    }
 }

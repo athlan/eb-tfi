@@ -14,4 +14,10 @@ public interface PriceInterface {
     double getAmount();
 
     Currency getCurrency();
+
+    PriceInterface add(PriceInterface price);
+
+    PriceInterface sub(PriceInterface price);
+
+    PriceInterface multiply(double factor);
 }
