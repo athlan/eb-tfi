@@ -1,10 +1,12 @@
 package pl.eurobank.tfi.simulator.repository;
 
+import com.google.common.eventbus.EventBus;
 import pl.eurobank.tfi.component.investmentfundwallet.domain.*;
 import pl.eurobank.tfi.component.investmentfundwallet.domain.event.InvestmentTransactionEvent;
 import pl.eurobank.tfi.component.investmentfundwallet.repository.InvestmentWalletTransactionRepositoryInterface;
 import pl.eurobank.tfi.component.investmentfundwallet.repository.exception.TransactionNoUnitsInWalletException;
 import pl.eurobank.tfi.component.investmentfundwallet.repository.exception.TransactionNotEnoughAmountInWalletException;
+import pl.eurobank.tfi.component.investmentfundwallet.repository.exception.TransactionNotEnoughUnitsQuantityInWalletException;
 import pl.eurobank.tfi.component.money.domain.Price;
 import pl.eurobank.tfi.component.money.domain.PriceInterface;
 
@@ -15,10 +17,13 @@ import java.util.Map;
 
 public class InvestmentWalletTransactionInMemoryRepository implements InvestmentWalletTransactionRepositoryInterface {
 
+    EventBus eventBus;
+
     private List<InvestmentTransactionInterface> storage;
 
-    public InvestmentWalletTransactionInMemoryRepository() {
+    public InvestmentWalletTransactionInMemoryRepository(EventBus eventBus) {
         this.storage = new ArrayList<>();
+        this.eventBus = eventBus;
     }
 
     @Override
@@ -60,7 +65,7 @@ public class InvestmentWalletTransactionInMemoryRepository implements Investment
                 throw new TransactionNoUnitsInWalletException("No wallet entry to sell this unit type.");
             }
             if(walletEntry.getQuantity() < transaction.getQuantity()) {
-                throw new TransactionNotEnoughAmountInWalletException("No enough quantity in wallet to sell this unit type.");
+                throw new TransactionNotEnoughUnitsQuantityInWalletException("No enough quantity in wallet to sell this unit type.");
             }
         }
 
@@ -72,7 +77,7 @@ public class InvestmentWalletTransactionInMemoryRepository implements Investment
         wallet.addEntry(new InvestmentWalletEntry(transaction.getInvestmentFundUnitType(), transaction.getQuantity()));
 
         InvestmentTransactionEvent event = new InvestmentTransactionEvent(transaction, new Date());
-        // TODO: fire event to event bus.
+        eventBus.post(event);
 
         return transaction;
     }

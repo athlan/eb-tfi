@@ -21,7 +21,7 @@ public class InvestmentFund implements InvestmentFundInterface {
 
     @Override
     public String getName() {
-        return null;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -65,7 +65,7 @@ public class InvestmentFund implements InvestmentFundInterface {
             return true;
         }
 
-        if(!(another instanceof InvestmentFundInterface)) {
+        if(null == another && !(another instanceof InvestmentFundInterface)) {
             return false;
         }
 

@@ -28,6 +28,12 @@ public class Price implements PriceInterface {
         return this.currency;
     }
 
+
+    @Override
+    public String toString() {
+        return amount + " " + currency.getCurrencyCode();
+    }
+
     @Override
     public boolean equals(Object another) {
         if(another == this) {

@@ -1,5 +1,8 @@
 package pl.eurobank.tfi.simulator.repository;
 
+import com.google.common.eventbus.EventBus;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import pl.eurobank.tfi.component.investmentfund.domain.InvestmentFund;
 import pl.eurobank.tfi.component.investmentfund.domain.InvestmentFundUnitType;
@@ -11,6 +14,7 @@ import pl.eurobank.tfi.component.investmentfundwallet.repository.exception.Trans
 import pl.eurobank.tfi.component.investmentfundwallet.repository.exception.TransactionNotEnoughUnitsQuantityInWalletException;
 import pl.eurobank.tfi.component.money.domain.Price;
 import pl.eurobank.tfi.component.money.domain.PriceInterface;
+import pl.eurobank.tfi.simulator.listener.InvestmentTransactionEventListener;
 
 import java.util.Arrays;
 import java.util.Currency;
@@ -20,14 +24,27 @@ import static org.junit.Assert.*;
 
 public class InvestmentWalletTransactionInMemoryRepositoryTest {
 
+    private EventBus eventBus;
+
+    @Before
+    public void setup() {
+        eventBus = new EventBus();
+
+        eventBus.register(new InvestmentTransactionEventListener());
+    }
+
     @Test
     public void should_be_possible_make_transaction() {
+        EventBus eventBus2 = new EventBus();
+        eventBus2.register(new InvestmentTransactionEventListener());
+        eventBus2.post(new Object());
+
         PriceInterface investmentFundPrice = new Price(100, Currency.getInstance("EUR"));
         InvestmentFund investmentFund = new InvestmentFund("Fund1", investmentFundPrice);
         InvestmentFundUnitTypeInterface unitType = new InvestmentFundUnitType(investmentFund, "Unit1");
         investmentFund.addUnitType(unitType);
 
-        InvestmentWalletTransactionRepositoryInterface repository = new InvestmentWalletTransactionInMemoryRepository();
+        InvestmentWalletTransactionRepositoryInterface repository = new InvestmentWalletTransactionInMemoryRepository(eventBus);
         PriceInterface walletAmount = new Price(1000, Currency.getInstance("EUR"));
         InvestmentWalletInterface wallet = new InvestmentWallet(walletAmount);
 
@@ -44,7 +61,7 @@ public class InvestmentWalletTransactionInMemoryRepositoryTest {
         InvestmentFundUnitTypeInterface unitType = new InvestmentFundUnitType(investmentFund, "Unit1");
         investmentFund.addUnitType(unitType);
 
-        InvestmentWalletTransactionRepositoryInterface repository = new InvestmentWalletTransactionInMemoryRepository();
+        InvestmentWalletTransactionRepositoryInterface repository = new InvestmentWalletTransactionInMemoryRepository(eventBus);
         PriceInterface walletAmount = new Price(1000, Currency.getInstance("EUR"));
         InvestmentWalletInterface wallet = new InvestmentWallet(walletAmount);
 
@@ -62,7 +79,7 @@ public class InvestmentWalletTransactionInMemoryRepositoryTest {
         InvestmentFundUnitTypeInterface unitType2 = new InvestmentFundUnitType(investmentFund, "Unit2");
         investmentFund.addUnitType(unitType2);
 
-        InvestmentWalletTransactionRepositoryInterface repository = new InvestmentWalletTransactionInMemoryRepository();
+        InvestmentWalletTransactionRepositoryInterface repository = new InvestmentWalletTransactionInMemoryRepository(eventBus);
         PriceInterface walletAmount = new Price(10000, Currency.getInstance("EUR"));
         InvestmentWalletInterface wallet = new InvestmentWallet(walletAmount);
 
@@ -80,7 +97,7 @@ public class InvestmentWalletTransactionInMemoryRepositoryTest {
         InvestmentFundUnitTypeInterface unitType = new InvestmentFundUnitType(investmentFund, "Unit1");
         investmentFund.addUnitType(unitType);
 
-        InvestmentWalletTransactionRepositoryInterface repository = new InvestmentWalletTransactionInMemoryRepository();
+        InvestmentWalletTransactionRepositoryInterface repository = new InvestmentWalletTransactionInMemoryRepository(eventBus);
         PriceInterface walletAmount = new Price(10000, Currency.getInstance("EUR"));
         InvestmentWalletInterface wallet = new InvestmentWallet(walletAmount);
 
@@ -98,7 +115,7 @@ public class InvestmentWalletTransactionInMemoryRepositoryTest {
         InvestmentFundUnitTypeInterface unitType = new InvestmentFundUnitType(investmentFund, "Unit1");
         investmentFund.addUnitType(unitType);
 
-        InvestmentWalletTransactionRepositoryInterface repository = new InvestmentWalletTransactionInMemoryRepository();
+        InvestmentWalletTransactionRepositoryInterface repository = new InvestmentWalletTransactionInMemoryRepository(eventBus);
         PriceInterface walletAmount = new Price(1000, Currency.getInstance("EUR"));
         InvestmentWalletInterface wallet = new InvestmentWallet(walletAmount);
 
@@ -122,7 +139,7 @@ public class InvestmentWalletTransactionInMemoryRepositoryTest {
         InvestmentFundUnitTypeInterface unitType = new InvestmentFundUnitType(investmentFund, "Unit1");
         investmentFund.addUnitType(unitType);
 
-        InvestmentWalletTransactionRepositoryInterface repository = new InvestmentWalletTransactionInMemoryRepository();
+        InvestmentWalletTransactionRepositoryInterface repository = new InvestmentWalletTransactionInMemoryRepository(eventBus);
         PriceInterface walletAmount = new Price(1000, Currency.getInstance("EUR"));
         InvestmentWalletInterface wallet = new InvestmentWallet(walletAmount);
 
