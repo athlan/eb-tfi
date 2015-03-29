@@ -39,8 +39,8 @@ public class AbstractInvestmentTransaction implements InvestmentTransactionInter
     }
 
     @Override
-    public InvestmentFundUnitTypeInterface getInvestmentFundUnit() {
-        return null;
+    public InvestmentFundUnitTypeInterface getInvestmentFundUnitType() {
+        return investmentFundUnitType;
     }
 
     @Override

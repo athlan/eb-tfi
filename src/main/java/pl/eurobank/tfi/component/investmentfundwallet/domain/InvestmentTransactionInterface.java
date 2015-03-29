@@ -9,7 +9,7 @@ public interface InvestmentTransactionInterface {
 
     InvestmentWalletInterface getWallet();
 
-    InvestmentFundUnitTypeInterface getInvestmentFundUnit();
+    InvestmentFundUnitTypeInterface getInvestmentFundUnitType();
 
     Long getQuantity();
 

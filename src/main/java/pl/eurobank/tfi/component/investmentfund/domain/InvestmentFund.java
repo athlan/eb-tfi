@@ -30,7 +30,7 @@ public class InvestmentFund implements InvestmentFundInterface {
 
     @Override
     public PriceInterface getCurrentPricing() {
-        return null;
+        return currentPricing;
     }
 
     public void setCurrentPricing(PriceInterface currentPricing) {
