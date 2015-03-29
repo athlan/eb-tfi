@@ -5,7 +5,7 @@ import pl.eurobank.tfi.component.investmentfundwallet.domain.InvestmentWallet;
 
 public interface InvestmentWalletTransactionRepositoryInterface {
 
-    InvestmentWalletTransactionRepositoryInterface[] findTransactionsByWallet(InvestmentWallet wallet);
+    InvestmentTransactionInterface[] findTransactionsByWallet(InvestmentWallet wallet);
 
-    InvestmentWalletTransactionRepositoryInterface[] createTransaction(InvestmentTransactionInterface transaction);
+    InvestmentTransactionInterface createTransaction(InvestmentTransactionInterface transaction);
 }
