@@ -2,6 +2,8 @@ package pl.eurobank.tfi.simulator.repository;
 
 import pl.eurobank.tfi.component.investmentfundwallet.domain.*;
 import pl.eurobank.tfi.component.investmentfundwallet.repository.InvestmentWalletTransactionRepositoryInterface;
+import pl.eurobank.tfi.component.investmentfundwallet.repository.exception.TransactionNoUnitsInWalletException;
+import pl.eurobank.tfi.component.investmentfundwallet.repository.exception.TransactionNotEnoughAmountInWalletException;
 import pl.eurobank.tfi.component.money.domain.Price;
 import pl.eurobank.tfi.component.money.domain.PriceInterface;
 
@@ -46,17 +48,17 @@ public class InvestmentWalletTransactionInMemoryRepository implements Investment
         InvestmentWalletInterface wallet = transaction.getWallet();
 
         if(wallet.getAmount().getAmount() < transaction.getPriceValue().getAmount()) {
-            throw new IllegalStateException("No enough money in wallet to do this transaction");
+            throw new TransactionNotEnoughAmountInWalletException("No enough money in wallet to do this transaction");
         }
 
         if(transaction instanceof InvestmentSellTransaction) {
             InvestmentWalletEntryInterface walletEntry = wallet.getEntryForInvestmentFundUnitType(transaction.getInvestmentFundUnitType());
 
             if(null == walletEntry) {
-                throw new IllegalStateException("No wallet entry to sell this unit type.");
+                throw new TransactionNoUnitsInWalletException("No wallet entry to sell this unit type.");
             }
             if(walletEntry.getQuantity() < transaction.getQuantity()) {
-                throw new IllegalStateException("No enough quantity in wallet to sell this unit type.");
+                throw new TransactionNotEnoughAmountInWalletException("No enough quantity in wallet to sell this unit type.");
             }
         }
 

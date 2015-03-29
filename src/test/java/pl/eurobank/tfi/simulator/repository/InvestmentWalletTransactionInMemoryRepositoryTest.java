@@ -6,6 +6,9 @@ import pl.eurobank.tfi.component.investmentfund.domain.InvestmentFundUnitType;
 import pl.eurobank.tfi.component.investmentfund.domain.InvestmentFundUnitTypeInterface;
 import pl.eurobank.tfi.component.investmentfundwallet.domain.*;
 import pl.eurobank.tfi.component.investmentfundwallet.repository.InvestmentWalletTransactionRepositoryInterface;
+import pl.eurobank.tfi.component.investmentfundwallet.repository.exception.TransactionNoUnitsInWalletException;
+import pl.eurobank.tfi.component.investmentfundwallet.repository.exception.TransactionNotEnoughAmountInWalletException;
+import pl.eurobank.tfi.component.investmentfundwallet.repository.exception.TransactionNotEnoughUnitsQuantityInWalletException;
 import pl.eurobank.tfi.component.money.domain.Price;
 import pl.eurobank.tfi.component.money.domain.PriceInterface;
 
@@ -34,7 +37,7 @@ public class InvestmentWalletTransactionInMemoryRepositoryTest {
 
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test(expected = TransactionNotEnoughAmountInWalletException.class)
     public void should_be_impossible_make_too_expensive_transaction() {
         PriceInterface investmentFundPrice = new Price(2000, Currency.getInstance("EUR"));
         InvestmentFund investmentFund = new InvestmentFund("Fund1", investmentFundPrice);
@@ -50,7 +53,7 @@ public class InvestmentWalletTransactionInMemoryRepositoryTest {
         repository.createTransaction(transaction);
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test(expected = TransactionNoUnitsInWalletException.class)
     public void should_not_be_possible_selling_units_not_in_wallet() {
         PriceInterface investmentFundPrice = new Price(100, Currency.getInstance("EUR"));
         InvestmentFund investmentFund = new InvestmentFund("Fund1", investmentFundPrice);
@@ -67,6 +70,24 @@ public class InvestmentWalletTransactionInMemoryRepositoryTest {
         repository.createTransaction(transaction);
 
         InvestmentTransactionInterface transaction2 = new InvestmentSellTransaction(wallet, unitType2, 1L, new Date());
+        repository.createTransaction(transaction2);
+    }
+
+    @Test(expected = TransactionNotEnoughUnitsQuantityInWalletException.class)
+    public void should_not_be_possible_selling_units_not_enough_quantity_in_wallet() {
+        PriceInterface investmentFundPrice = new Price(100, Currency.getInstance("EUR"));
+        InvestmentFund investmentFund = new InvestmentFund("Fund1", investmentFundPrice);
+        InvestmentFundUnitTypeInterface unitType = new InvestmentFundUnitType(investmentFund, "Unit1");
+        investmentFund.addUnitType(unitType);
+
+        InvestmentWalletTransactionRepositoryInterface repository = new InvestmentWalletTransactionInMemoryRepository();
+        PriceInterface walletAmount = new Price(10000, Currency.getInstance("EUR"));
+        InvestmentWalletInterface wallet = new InvestmentWallet(walletAmount);
+
+        InvestmentTransactionInterface transaction = new InvestmentBuyTransaction(wallet, unitType, 2L, new Date());
+        repository.createTransaction(transaction);
+
+        InvestmentTransactionInterface transaction2 = new InvestmentSellTransaction(wallet, unitType, 4L, new Date());
         repository.createTransaction(transaction2);
     }
 
