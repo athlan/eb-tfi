@@ -30,6 +30,10 @@ public class Price implements PriceInterface {
 
     @Override
     public boolean equals(Object another) {
+        if(another == this) {
+            return true;
+        }
+
         if(!(another instanceof PriceInterface)) {
             return false;
         }

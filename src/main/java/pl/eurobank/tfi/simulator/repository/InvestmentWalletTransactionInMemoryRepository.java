@@ -1,7 +1,6 @@
 package pl.eurobank.tfi.simulator.repository;
 
-import pl.eurobank.tfi.component.investmentfundwallet.domain.InvestmentTransactionInterface;
-import pl.eurobank.tfi.component.investmentfundwallet.domain.InvestmentWalletInterface;
+import pl.eurobank.tfi.component.investmentfundwallet.domain.*;
 import pl.eurobank.tfi.component.investmentfundwallet.repository.InvestmentWalletTransactionRepositoryInterface;
 import pl.eurobank.tfi.component.money.domain.Price;
 import pl.eurobank.tfi.component.money.domain.PriceInterface;
@@ -44,14 +43,29 @@ public class InvestmentWalletTransactionInMemoryRepository implements Investment
 
     @Override
     public InvestmentTransactionInterface createTransaction(InvestmentTransactionInterface transaction) {
-        if(transaction.getWallet().getAmount().getAmount() < transaction.getPriceValue().getAmount()) {
+        InvestmentWalletInterface wallet = transaction.getWallet();
+
+        if(wallet.getAmount().getAmount() < transaction.getPriceValue().getAmount()) {
             throw new IllegalStateException("No enough money in wallet to do this transaction");
+        }
+
+        if(transaction instanceof InvestmentSellTransaction) {
+            InvestmentWalletEntryInterface walletEntry = wallet.getEntryForInvestmentFundUnitType(transaction.getInvestmentFundUnitType());
+
+            if(null == walletEntry) {
+                throw new IllegalStateException("No wallet entry to sell this unit type.");
+            }
+            if(walletEntry.getQuantity() < transaction.getQuantity()) {
+                throw new IllegalStateException("No enough quantity in wallet to sell this unit type.");
+            }
         }
 
         storage.add(transaction);
 
-        PriceInterface price = transaction.getWallet().getAmount().add(transaction.getPrice());
-        transaction.getWallet().setAmount(price);
+        PriceInterface price = wallet.getAmount().add(transaction.getPrice());
+        wallet.setAmount(price);
+
+        wallet.addEntry(new InvestmentWalletEntry(transaction.getInvestmentFundUnitType(), transaction.getQuantity()));
 
         return transaction;
     }

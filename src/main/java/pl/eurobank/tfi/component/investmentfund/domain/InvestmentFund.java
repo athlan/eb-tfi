@@ -57,4 +57,20 @@ public class InvestmentFund implements InvestmentFundInterface {
 
         unitTypes.remove(unitType);
     }
+
+
+    @Override
+    public boolean equals(Object another) {
+        if(another == this) {
+            return true;
+        }
+
+        if(!(another instanceof InvestmentFundInterface)) {
+            return false;
+        }
+
+        InvestmentFundInterface another2 = (InvestmentFundInterface) another;
+
+        return another2.getName().equals(this.getName());
+    }
 }

@@ -60,7 +60,7 @@ public class InvestmentFundTest {
         InvestmentFundUnitTypeInterface unitType1 = new InvestmentFundUnitType(investmentFund, "Unit1");
         investmentFund.addUnitType(unitType1);
 
-        InvestmentFundUnitTypeInterface unitType2 = new InvestmentFundUnitType(investmentFund, "Unit1");
+        InvestmentFundUnitTypeInterface unitType2 = new InvestmentFundUnitType(investmentFund, "Unit2");
         investmentFund.addUnitType(unitType2);
 
         investmentFund.removeUnitType(unitType1);
@@ -69,7 +69,7 @@ public class InvestmentFundTest {
                 1, investmentFund.getUnitTypes().length);
 
         assertFalse(
-                "Unit type should not exists after removal of another.",
+                "Unit type should still exists after removal of another.",
                 Arrays.asList(investmentFund.getUnitTypes()).contains(unitType1));
 
         assertTrue(

@@ -50,6 +50,26 @@ public class InvestmentWalletTransactionInMemoryRepositoryTest {
         repository.createTransaction(transaction);
     }
 
+    @Test(expected = IllegalStateException.class)
+    public void should_not_be_possible_selling_units_not_in_wallet() {
+        PriceInterface investmentFundPrice = new Price(100, Currency.getInstance("EUR"));
+        InvestmentFund investmentFund = new InvestmentFund("Fund1", investmentFundPrice);
+        InvestmentFundUnitTypeInterface unitType = new InvestmentFundUnitType(investmentFund, "Unit1");
+        investmentFund.addUnitType(unitType);
+        InvestmentFundUnitTypeInterface unitType2 = new InvestmentFundUnitType(investmentFund, "Unit2");
+        investmentFund.addUnitType(unitType2);
+
+        InvestmentWalletTransactionRepositoryInterface repository = new InvestmentWalletTransactionInMemoryRepository();
+        PriceInterface walletAmount = new Price(10000, Currency.getInstance("EUR"));
+        InvestmentWalletInterface wallet = new InvestmentWallet(walletAmount);
+
+        InvestmentTransactionInterface transaction = new InvestmentBuyTransaction(wallet, unitType, 2L, new Date());
+        repository.createTransaction(transaction);
+
+        InvestmentTransactionInterface transaction2 = new InvestmentSellTransaction(wallet, unitType2, 1L, new Date());
+        repository.createTransaction(transaction2);
+    }
+
     @Test
     public void wallet_amount_should_be_decreased_after_transaction() {
         PriceInterface investmentFundPrice = new Price(100, Currency.getInstance("EUR"));
