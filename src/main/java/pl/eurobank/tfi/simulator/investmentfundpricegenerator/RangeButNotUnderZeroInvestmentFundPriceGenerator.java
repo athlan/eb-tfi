@@ -39,6 +39,12 @@ public class RangeButNotUnderZeroInvestmentFundPriceGenerator implements Investm
 
         double new_amount_delta = Math.random() * range + range_min;
 
-        return new Price(current.getAmount() + new_amount_delta, min.getCurrency());
+        PriceInterface new_price = new Price(current.getAmount() + new_amount_delta, min.getCurrency());
+
+        if(new_price.getAmount() < 0) {
+            new_price = new Price(0, min.getCurrency());
+        }
+
+        return new_price;
     }
 }

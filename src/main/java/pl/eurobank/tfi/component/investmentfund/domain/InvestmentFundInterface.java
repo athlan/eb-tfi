@@ -8,5 +8,11 @@ public interface InvestmentFundInterface {
 
     PriceInterface getCurrentPricing();
 
+    void setCurrentPricing(PriceInterface currentPricing);
+
     InvestmentFundUnitTypeInterface[] getUnitTypes();
+
+    void addUnitType(InvestmentFundUnitTypeInterface unitType);
+
+    void removeUnitType(InvestmentFundUnitTypeInterface unitType);
 }

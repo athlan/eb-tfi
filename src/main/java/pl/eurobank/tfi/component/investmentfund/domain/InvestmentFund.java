@@ -33,6 +33,7 @@ public class InvestmentFund implements InvestmentFundInterface {
         return currentPricing;
     }
 
+    @Override
     public void setCurrentPricing(PriceInterface currentPricing) {
         this.currentPricing = currentPricing;
     }
@@ -42,6 +43,7 @@ public class InvestmentFund implements InvestmentFundInterface {
         return unitTypes.toArray(new InvestmentFundUnitTypeInterface[unitTypes.size()]);
     }
 
+    @Override
     public void addUnitType(InvestmentFundUnitTypeInterface unitType) {
         if(unitType.getInvestmentFund() != this) {
             throw new IllegalArgumentException("Investment fund of passed unit type is not equal to investment fund which is added to.");
@@ -50,6 +52,7 @@ public class InvestmentFund implements InvestmentFundInterface {
         unitTypes.add(unitType);
     }
 
+    @Override
     public void removeUnitType(InvestmentFundUnitTypeInterface unitType) {
         if(unitType.getInvestmentFund() != this) {
             throw new IllegalArgumentException("Investment fund of passed unit type is not equal to investment fund which is removed from.");

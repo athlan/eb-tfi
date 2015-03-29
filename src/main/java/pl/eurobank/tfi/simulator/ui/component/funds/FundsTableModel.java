@@ -13,13 +13,21 @@ public class FundsTableModel extends AbstractTableModel {
 
     private InvestmentFundInterface[] data;
 
+    private String[] columnNames = new String[] {"Fund name", "Current price", "Actions"};
+
     public void fetchData() {
         data = investmentFundRepository.getList(null);
+        fireTableDataChanged();
     }
 
     @Override
     public int getRowCount() {
         return data.length;
+    }
+
+    @Override
+    public String getColumnName(int col) {
+        return columnNames[col];
     }
 
     @Override
