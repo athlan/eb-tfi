@@ -1,5 +1,7 @@
 apply plugin: 'java'
 
+version = '1.0'
+
 repositories {
     mavenCentral()
 }
@@ -9,4 +11,21 @@ dependencies {
     compile 'com.google.guava:guava:15.0'
 
     testCompile 'junit:junit:4.+'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'pl.eurobank.tfi.simulator.ui.Main'
+    }
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'TFI',
+                'Implementation-Version': version,
+                'Main-Class': 'pl.eurobank.tfi.simulator.ui.Main'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
