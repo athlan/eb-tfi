@@ -33,7 +33,7 @@ public interface InvestmentFundInterface {
      * Set current pricing for fund. Current pricing value denotes
      * price that user have to pay for buy one unit of investment fund.
      *
-     * @@param currentPricing current pricing for fund
+     * @param currentPricing current pricing for fund
      */
     void setCurrentPricing(PriceInterface currentPricing);
 
@@ -48,14 +48,14 @@ public interface InvestmentFundInterface {
     /**
      * Add unit of fund.
      *
-     * @return units of fund
+     * @param unitType unit type
      */
     void addUnitType(InvestmentFundUnitTypeInterface unitType);
 
     /**
      * Remove unit of fund.
      *
-     * @return units of fund
+     * @param unitType unit type
      */
     void removeUnitType(InvestmentFundUnitTypeInterface unitType);
 }

@@ -58,8 +58,8 @@ public class Price implements PriceInterface {
      * Compares two price objects. Two prices is equal only if there are both same currency
      * and have same amount of money.
      *
-     * @param another
-     * @return
+     * @param another the object compare to
+     * @return if objects equals
      */
     @Override
     public boolean equals(Object another) {
@@ -83,7 +83,7 @@ public class Price implements PriceInterface {
      *
      * @param price price to add
      * @throws IllegalArgumentException if prices are from different currencies
-     * @return
+     * @return new price
      */
     @Override
     public PriceInterface add(PriceInterface price) {
@@ -100,7 +100,7 @@ public class Price implements PriceInterface {
      *
      * @param price price to substract
      * @throws IllegalArgumentException if prices are from different currencies
-     * @return
+     * @return new price
      */
     @Override
     public PriceInterface sub(PriceInterface price) {
@@ -116,7 +116,7 @@ public class Price implements PriceInterface {
      * money amount multiplied by given factor.
      *
      * @param factor factor to multiply
-     * @return
+     * @return new price
      */
     @Override
     public PriceInterface multiply(double factor) {

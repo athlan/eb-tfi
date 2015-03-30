@@ -20,8 +20,8 @@ public class RangeButNotUnderZeroInvestmentFundPriceGenerator implements Investm
     /**
      * Creates generator for values from min and max range.
      *
-     * @param min
-     * @param max
+     * @param min minimum value of net value
+     * @param max maximum value of net value
      */
     public RangeButNotUnderZeroInvestmentFundPriceGenerator(final PriceInterface min, final PriceInterface max) {
         if(!min.getCurrency().equals(max.getCurrency())) {
@@ -41,7 +41,7 @@ public class RangeButNotUnderZeroInvestmentFundPriceGenerator implements Investm
     /**
      * Generates new value for fund.
      *
-     * @param investmentFund
+     * @param investmentFund investment fund
      * @return new value for fund
      */
     @Override

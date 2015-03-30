@@ -31,7 +31,7 @@ public interface PriceInterface {
      *
      * @param price price to add
      * @throws IllegalArgumentException if prices are from different currencies
-     * @return
+     * @return new price
      */
     PriceInterface add(PriceInterface price);
 
@@ -41,7 +41,7 @@ public interface PriceInterface {
      *
      * @param price price to substract
      * @throws IllegalArgumentException if prices are from different currencies
-     * @return
+     * @return new price
      */
     PriceInterface sub(PriceInterface price);
 
@@ -50,7 +50,7 @@ public interface PriceInterface {
      * money amount multiplied by given factor.
      *
      * @param factor factor to multiply
-     * @return
+     * @return new price
      */
     PriceInterface multiply(double factor);
 }

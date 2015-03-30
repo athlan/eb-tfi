@@ -26,8 +26,8 @@ public interface InvestmentFundPriceRepositoryInterface {
     /**
      * Changes price of investment fund.
      *
-     * @param investmentFund
-     * @param newPrice
+     * @param investmentFund investment fund
+     * @param newPrice new price
      * @return investment fund that price has been changed for
      */
     InvestmentFundInterface changePrice(InvestmentFundInterface investmentFund, PriceInterface newPrice);

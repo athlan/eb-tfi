@@ -36,6 +36,7 @@ public interface InvestmentWalletInterface {
     /**
      * Get buyed investment funds units entry for certain unit type.
      *
+     * @param unitType unit type
      * @return investment funds units
      */
     InvestmentWalletEntryInterface getEntryForInvestmentFundUnitType(InvestmentFundUnitTypeInterface unitType);
@@ -43,12 +44,14 @@ public interface InvestmentWalletInterface {
     /**
      * Add buyed investment funds units.
      *
+     * @param entry wallet entry
      */
     void addEntry(InvestmentWalletEntryInterface entry);
 
     /**
      * Remove buyed investment funds units.
      *
+     * @param entry wallet entry
      */
     void removeEntry(InvestmentWalletEntryInterface entry);
 }

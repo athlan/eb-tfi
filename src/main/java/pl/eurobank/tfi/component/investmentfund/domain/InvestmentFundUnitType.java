@@ -48,7 +48,7 @@ public class InvestmentFundUnitType implements InvestmentFundUnitTypeInterface {
      *
      * Comparing by object reference or name is for default.
      *
-     * @param another
+     * @param another the object compare to
      * @return if funds units are equal
      */
     @Override

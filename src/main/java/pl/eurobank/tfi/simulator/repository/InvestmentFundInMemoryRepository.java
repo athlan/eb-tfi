@@ -29,7 +29,7 @@ public class InvestmentFundInMemoryRepository implements InvestmentFundRepositor
     /**
      * Get investment fund by identifier.
      *
-     * @param id
+     * @param id identifier
      * @return investment fund or NULL
      */
     @Override
@@ -61,7 +61,7 @@ public class InvestmentFundInMemoryRepository implements InvestmentFundRepositor
     /**
      * Saves data about investment fund.
      *
-     * @param investmentFund
+     * @param investmentFund investment fund
      * @return saved investment fund object
      */
     @Override

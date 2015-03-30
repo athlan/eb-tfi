@@ -30,7 +30,7 @@ public class InvestmentFundPriceInMemoryRepository implements InvestmentFundPric
     /**
      * Creates repository.
      *
-     * @param eventBus
+     * @param eventBus event bus for propagate event
      */
     public InvestmentFundPriceInMemoryRepository(EventBus eventBus) {
         this.eventBus = eventBus;
@@ -40,8 +40,8 @@ public class InvestmentFundPriceInMemoryRepository implements InvestmentFundPric
     /**
      * Changes price of investment fund.
      *
-     * @param investmentFund
-     * @param newPrice
+     * @param investmentFund investment fund
+     * @param newPrice new price
      * @return investment fund that price has been changed for
      */
     @Override

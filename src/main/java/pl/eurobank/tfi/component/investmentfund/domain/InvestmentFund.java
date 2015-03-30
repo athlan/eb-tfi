@@ -88,7 +88,7 @@ public class InvestmentFund implements InvestmentFundInterface {
     /**
      * Add unit of fund.
      *
-     * @return units of fund
+     * @param unitType unit type
      */
     @Override
     public void addUnitType(InvestmentFundUnitTypeInterface unitType) {
@@ -102,7 +102,7 @@ public class InvestmentFund implements InvestmentFundInterface {
     /**
      * Remove unit of fund.
      *
-     * @return units of fund
+     * @param unitType unit type
      */
     @Override
     public void removeUnitType(InvestmentFundUnitTypeInterface unitType) {
@@ -118,7 +118,7 @@ public class InvestmentFund implements InvestmentFundInterface {
      *
      * Comparing by object reference or name is for default.
      *
-     * @param another
+     * @param another the object compare to
      * @return if funds are equal
      */
     @Override

@@ -16,7 +16,7 @@ public class InvestmentTransactionCommissionUnitTypeBEventListener {
     /**
      * Method triggered wile event occurs.
      *
-     * @param event
+     * @param event catched event
      */
     @Subscribe
     public void recordInvestmentTransactionEvent(InvestmentTransactionEvent event) {

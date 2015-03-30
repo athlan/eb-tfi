@@ -9,7 +9,7 @@ public class TransactionNotEnoughAmountInWalletException extends IllegalStateExc
     /**
      * Creates exception
      *
-     * @param message
+     * @param message exception message
      */
     public TransactionNotEnoughAmountInWalletException(String message) {
         super(message);

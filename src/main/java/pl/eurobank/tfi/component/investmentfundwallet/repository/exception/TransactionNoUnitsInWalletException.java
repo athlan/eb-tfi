@@ -10,7 +10,7 @@ public class TransactionNoUnitsInWalletException extends IllegalStateException {
     /**
      * Creates exception
      *
-     * @param message
+     * @param message exception message
      */
     public TransactionNoUnitsInWalletException(String message) {
         super(message);

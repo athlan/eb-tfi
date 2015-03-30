@@ -10,7 +10,7 @@ public class TransactionNotEnoughUnitsQuantityInWalletException extends IllegalS
     /**
      * Creates exception
      *
-     * @param message
+     * @param message exception message
      */
     public TransactionNotEnoughUnitsQuantityInWalletException(String message) {
         super(message);

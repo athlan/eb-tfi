@@ -22,7 +22,7 @@ public class InvestmentWallet implements InvestmentWalletInterface {
     /**
      * Creates investment wallet in certain currency.
      *
-     * @param amount
+     * @param amount wallet amount
      */
     public InvestmentWallet(final PriceInterface amount) {
         this.amount = amount;
@@ -62,6 +62,7 @@ public class InvestmentWallet implements InvestmentWalletInterface {
     /**
      * Get buyed investment funds units entry for certain unit type.
      *
+     * @param unitType unit type
      * @return investment funds units
      */
     @Override
@@ -78,6 +79,7 @@ public class InvestmentWallet implements InvestmentWalletInterface {
     /**
      * Add buyed investment funds units.
      *
+     * @param entry wallet entry
      */
     @Override
     public void addEntry(InvestmentWalletEntryInterface entry) {
@@ -94,6 +96,7 @@ public class InvestmentWallet implements InvestmentWalletInterface {
     /**
      * Remove buyed investment funds units.
      *
+     * @param entry wallet entry
      */
     @Override
     public void removeEntry(InvestmentWalletEntryInterface entry) {

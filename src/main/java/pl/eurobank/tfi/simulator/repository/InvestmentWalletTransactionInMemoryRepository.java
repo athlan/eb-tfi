@@ -31,7 +31,7 @@ public class InvestmentWalletTransactionInMemoryRepository implements Investment
     /**
      * Creates repository
      *
-     * @param eventBus
+     * @param eventBus event bus for propagate event
      */
     public InvestmentWalletTransactionInMemoryRepository(EventBus eventBus) {
         this.storage = new ArrayList<>();

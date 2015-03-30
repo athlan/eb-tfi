@@ -13,7 +13,7 @@ public interface InvestmentFundPriceGeneratorInterface {
     /**
      * Generates new value for fund.
      *
-     * @param investmentFund
+     * @param investmentFund investment fund
      * @return new value for fund
      */
     PriceInterface getFundPrice(InvestmentFundInterface investmentFund);

@@ -14,7 +14,7 @@ public interface InvestmentFundRepositoryInterface {
     /**
      * Get investment fund by identifier.
      *
-     * @param id
+     * @param id identifier
      * @return investment fund or NULL
      */
     InvestmentFundInterface getById(Object id);
@@ -30,7 +30,7 @@ public interface InvestmentFundRepositoryInterface {
     /**
      * Saves data about investment fund.
      *
-     * @param investmentFund
+     * @param investmentFund investment fund
      * @return saved investment fund object
      */
     InvestmentFundInterface save(InvestmentFundInterface investmentFund);

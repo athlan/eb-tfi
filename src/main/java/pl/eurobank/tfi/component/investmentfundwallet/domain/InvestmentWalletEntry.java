@@ -14,8 +14,8 @@ public class InvestmentWalletEntry implements InvestmentWalletEntryInterface {
     /**
      * Creates investment wallet entry.
      *
-     * @param investmentFundUnitType
-     * @param quantity
+     * @param investmentFundUnitType investment fund unit type
+     * @param quantity investment fund unit quantity
      */
     public InvestmentWalletEntry(final InvestmentFundUnitTypeInterface investmentFundUnitType, Long quantity) {
         this.investmentFundUnitType = investmentFundUnitType;
