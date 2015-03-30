@@ -11,6 +11,6 @@ public class InvestmentBuyTransaction extends AbstractInvestmentTransaction {
         super(wallet, investmentFundUnitType, quantity, transactionDate);
 
         // inverse price
-        this.price = new Price(super.getPrice().getAmount() * -1, super.getPrice().getCurrency());
+        setPrice(super.getPrice().multiply(-1.0));
     }
 }

@@ -11,6 +11,9 @@ public class FundsTableFactory {
     @Autowired
     private FundsTableModel tableModel;
 
+    public FundsTableFactory() {
+    }
+
     public JTable createTable() {
         JTable table = new JTable(tableModel);
 

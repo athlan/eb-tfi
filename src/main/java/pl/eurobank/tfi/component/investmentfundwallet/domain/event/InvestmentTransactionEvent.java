@@ -6,13 +6,25 @@ import java.util.Date;
 
 public class InvestmentTransactionEvent {
 
+    public enum Type {
+        PRE,
+        POST
+    }
+
+    private final Type type;
+
     private final InvestmentTransactionInterface investmentTransaction;
 
     private final Date date;
 
-    public InvestmentTransactionEvent(InvestmentTransactionInterface investmentTransaction, Date date) {
+    public InvestmentTransactionEvent(Type type, InvestmentTransactionInterface investmentTransaction, Date date) {
+        this.type = type;
         this.investmentTransaction = investmentTransaction;
         this.date = date;
+    }
+
+    public Type getType() {
+        return type;
     }
 
     public InvestmentTransactionInterface getInvestmentTransaction() {

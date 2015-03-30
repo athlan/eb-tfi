@@ -29,16 +29,10 @@ public class InvestmentWalletTransactionInMemoryRepositoryTest {
     @Before
     public void setup() {
         eventBus = new EventBus();
-
-        eventBus.register(new InvestmentTransactionEventListener());
     }
 
     @Test
     public void should_be_possible_make_transaction() {
-        EventBus eventBus2 = new EventBus();
-        eventBus2.register(new InvestmentTransactionEventListener());
-        eventBus2.post(new Object());
-
         PriceInterface investmentFundPrice = new Price(100, Currency.getInstance("EUR"));
         InvestmentFund investmentFund = new InvestmentFund("Fund1", investmentFundPrice);
         InvestmentFundUnitTypeInterface unitType = new InvestmentFundUnitType(investmentFund, "Unit1");

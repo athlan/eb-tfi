@@ -6,13 +6,7 @@ import pl.eurobank.tfi.component.investmentfundwallet.domain.event.InvestmentTra
 public class InvestmentTransactionEventListener {
 
     @Subscribe
-    public void recordInvestmentSellTransaction(InvestmentTransactionEvent event) {
-        throw new RuntimeException("acc");
+    public void recordInvestmentTransactionEvent(InvestmentTransactionEvent event) {
 //        System.out.println(event.getInvestmentTransaction());
-    }
-
-    @Subscribe
-    public void recordAll(Object event) {
-        throw new RuntimeException("abb");
     }
 }

@@ -37,6 +37,8 @@ public class Main {
 
         JLabel emptyLabel = new JLabel("a");
 
+
+
         frame.getContentPane().add(emptyLabel, BorderLayout.CENTER);
 
         JTable fundsTable = fundsTableFactory.createTable();

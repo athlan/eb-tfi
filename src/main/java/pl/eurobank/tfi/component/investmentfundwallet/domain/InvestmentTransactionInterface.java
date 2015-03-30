@@ -17,5 +17,9 @@ public interface InvestmentTransactionInterface {
 
     PriceInterface getPriceValue();
 
+    void setPrice(PriceInterface price);
+
+    void setPriceValue(PriceInterface priceValue);
+
     Date getTransactionDate();
 }

@@ -69,6 +69,10 @@ public class InvestmentWalletTransactionInMemoryRepository implements Investment
             }
         }
 
+        InvestmentTransactionEvent event;
+        event = new InvestmentTransactionEvent(InvestmentTransactionEvent.Type.PRE, transaction, new Date());
+        eventBus.post(event);
+
         storage.add(transaction);
 
         PriceInterface price = wallet.getAmount().add(transaction.getPrice());
@@ -76,7 +80,7 @@ public class InvestmentWalletTransactionInMemoryRepository implements Investment
 
         wallet.addEntry(new InvestmentWalletEntry(transaction.getInvestmentFundUnitType(), transaction.getQuantity()));
 
-        InvestmentTransactionEvent event = new InvestmentTransactionEvent(transaction, new Date());
+        event = new InvestmentTransactionEvent(InvestmentTransactionEvent.Type.POST, transaction, new Date());
         eventBus.post(event);
 
         return transaction;

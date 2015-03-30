@@ -8,17 +8,17 @@ import java.util.Date;
 
 public class AbstractInvestmentTransaction implements InvestmentTransactionInterface {
 
-    InvestmentWalletInterface wallet;
+    private InvestmentWalletInterface wallet;
 
-    InvestmentFundUnitTypeInterface investmentFundUnitType;
+    private InvestmentFundUnitTypeInterface investmentFundUnitType;
 
-    Long quantity;
+    private Long quantity;
 
-    PriceInterface price;
+    private PriceInterface price;
 
-    PriceInterface priceValue;
+    private PriceInterface priceValue;
 
-    Date transactionDate;
+    private Date transactionDate;
 
     public AbstractInvestmentTransaction(InvestmentWalletInterface wallet, InvestmentFundUnitTypeInterface investmentFundUnitType, Long quantity, Date transactionDate) {
         this.wallet = wallet;
@@ -64,5 +64,15 @@ public class AbstractInvestmentTransaction implements InvestmentTransactionInter
     @Override
     public PriceInterface getPriceValue() {
         return priceValue;
+    }
+
+    @Override
+    public void setPrice(PriceInterface price) {
+        this.price = price;
+    }
+
+    @Override
+    public void setPriceValue(PriceInterface priceValue) {
+        this.priceValue = priceValue;
     }
 }
