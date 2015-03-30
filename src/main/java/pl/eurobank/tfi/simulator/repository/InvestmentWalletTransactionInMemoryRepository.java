@@ -15,17 +15,36 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The repository of InvestmentTransactionInterface objects. Provides access to
+ * gather objects from abstract data source.
+ *
+ * This repository contains all information about investment transactions.
+ *
+ */
 public class InvestmentWalletTransactionInMemoryRepository implements InvestmentWalletTransactionRepositoryInterface {
 
-    EventBus eventBus;
+    private EventBus eventBus;
 
     private List<InvestmentTransactionInterface> storage;
 
+    /**
+     * Creates repository
+     *
+     * @param eventBus
+     */
     public InvestmentWalletTransactionInMemoryRepository(EventBus eventBus) {
         this.storage = new ArrayList<>();
         this.eventBus = eventBus;
     }
 
+    /**
+     * Get list of investment transactions for given wallet and parameters.
+     *
+     * @param wallet investment wallet
+     * @param params filters, sorting options
+     * @return list of investment transactions
+     */
     @Override
     public InvestmentTransactionInterface[] findTransactionsByWallet(InvestmentWalletInterface wallet, Map<String, String> params) {
         List<InvestmentTransactionInterface> tmp = new ArrayList<>();
@@ -39,6 +58,13 @@ public class InvestmentWalletTransactionInMemoryRepository implements Investment
         return tmp.toArray(new InvestmentTransactionInterface[tmp.size()]);
     }
 
+    /**
+     * Get summary price of investment transactions for given wallet and parameters.
+     *
+     * @param wallet investment wallet
+     * @param params filters, sorting options
+     * @return list of investment transactions
+     */
     @Override
     public PriceInterface getTransactionsValueByWallet(InvestmentWalletInterface wallet, Map<String, String> params) {
         double amount = 0.0;
@@ -50,6 +76,15 @@ public class InvestmentWalletTransactionInMemoryRepository implements Investment
         return new Price(amount, wallet.getAmount().getCurrency());
     }
 
+    /**
+     * Creates investment transaction.
+     *
+     * @param transaction transaction to make
+     * @throws TransactionNotEnoughAmountInWalletException Exception is thrown when there is no enough money in wallet to process buy transaction
+     * @throws TransactionNoUnitsInWalletException Exception is thrown when there is no units in wallet to process sell transaction
+     * @throws TransactionNotEnoughUnitsQuantityInWalletException Exception is thrown when there is no enough unit in wallet to process sell transaction
+     * @return transaction has been made
+     */
     @Override
     public InvestmentTransactionInterface createTransaction(InvestmentTransactionInterface transaction) {
         InvestmentWalletInterface wallet = transaction.getWallet();

@@ -2,7 +2,6 @@ package pl.eurobank.tfi.simulator.repository;
 
 import com.google.common.eventbus.EventBus;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import pl.eurobank.tfi.component.investmentfund.domain.InvestmentFund;
 import pl.eurobank.tfi.component.investmentfund.domain.InvestmentFundUnitType;

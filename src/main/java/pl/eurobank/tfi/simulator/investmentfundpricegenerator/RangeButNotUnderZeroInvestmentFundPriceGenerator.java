@@ -4,6 +4,11 @@ import pl.eurobank.tfi.component.investmentfund.domain.InvestmentFundInterface;
 import pl.eurobank.tfi.component.money.domain.Price;
 import pl.eurobank.tfi.component.money.domain.PriceInterface;
 
+/**
+ * Class generates new fund price based on minimum and maximum available change
+ * and random value from that value.
+ *
+ */
 public class RangeButNotUnderZeroInvestmentFundPriceGenerator implements InvestmentFundPriceGeneratorInterface {
 
     protected final PriceInterface min;
@@ -12,6 +17,12 @@ public class RangeButNotUnderZeroInvestmentFundPriceGenerator implements Investm
     protected double range_min;
     protected double range;
 
+    /**
+     * Creates generator for values from min and max range.
+     *
+     * @param min
+     * @param max
+     */
     public RangeButNotUnderZeroInvestmentFundPriceGenerator(final PriceInterface min, final PriceInterface max) {
         if(!min.getCurrency().equals(max.getCurrency())) {
             throw new IllegalArgumentException("min and max price should be in the same currency");
@@ -27,6 +38,12 @@ public class RangeButNotUnderZeroInvestmentFundPriceGenerator implements Investm
         this.range = max.getAmount() - min.getAmount();
     }
 
+    /**
+     * Generates new value for fund.
+     *
+     * @param investmentFund
+     * @return new value for fund
+     */
     @Override
     public PriceInterface getFundPrice(InvestmentFundInterface investmentFund) {
         PriceInterface current = investmentFund.getCurrentPricing();

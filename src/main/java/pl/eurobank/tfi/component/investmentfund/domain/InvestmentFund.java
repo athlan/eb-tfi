@@ -5,6 +5,16 @@ import pl.eurobank.tfi.component.money.domain.PriceInterface;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Investment fund.
+ *
+ * Investment fund is named and has a current pricing value. Current pricing value denotes
+ * price that user have to pay for buy one unit of investment fund.
+ *
+ * Investment funds has units which can be buyed by user and placed into
+ * his investment wallet to further sell.
+ *
+ */
 public class InvestmentFund implements InvestmentFundInterface {
 
     private String name;
@@ -13,36 +23,73 @@ public class InvestmentFund implements InvestmentFundInterface {
 
     private List<InvestmentFundUnitTypeInterface> unitTypes;
 
+    /**
+     * Creates investment fund.
+     *
+     * @param name name of fund
+     * @param currentPricing current pricing
+     */
     public InvestmentFund(final String name, final PriceInterface currentPricing) {
         this.name = name;
         this.currentPricing = currentPricing;
         this.unitTypes = new ArrayList<>();
     }
 
+    /**
+     * Get name of fund.
+     *
+     * @return name of fund.
+     */
     @Override
     public String getName() {
         return this.name;
     }
 
+    /**
+     * Set name of fund.
+     *
+     * @param name name of fund.
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Get current pricing for fund. Current pricing value denotes
+     * price that user have to pay for buy one unit of investment fund.
+     *
+     * @return current pricing for fund
+     */
     @Override
     public PriceInterface getCurrentPricing() {
         return currentPricing;
     }
 
+    /**
+     * Set current pricing for fund.
+     * @param currentPricing current pricing for fund
+     */
     @Override
     public void setCurrentPricing(PriceInterface currentPricing) {
         this.currentPricing = currentPricing;
     }
 
+    /**
+     * Get units of fund. Units can be buyed by user and placed into
+     * his investment wallet to further sell.
+     *
+     * @return units of fund
+     */
     @Override
     public InvestmentFundUnitTypeInterface[] getUnitTypes() {
         return unitTypes.toArray(new InvestmentFundUnitTypeInterface[unitTypes.size()]);
     }
 
+    /**
+     * Add unit of fund.
+     *
+     * @return units of fund
+     */
     @Override
     public void addUnitType(InvestmentFundUnitTypeInterface unitType) {
         if(unitType.getInvestmentFund() != this) {
@@ -52,6 +99,11 @@ public class InvestmentFund implements InvestmentFundInterface {
         unitTypes.add(unitType);
     }
 
+    /**
+     * Remove unit of fund.
+     *
+     * @return units of fund
+     */
     @Override
     public void removeUnitType(InvestmentFundUnitTypeInterface unitType) {
         if(unitType.getInvestmentFund() != this) {
@@ -61,7 +113,14 @@ public class InvestmentFund implements InvestmentFundInterface {
         unitTypes.remove(unitType);
     }
 
-
+    /**
+     * Compares investment fund by identifier.
+     *
+     * Comparing by object reference or name is for default.
+     *
+     * @param another
+     * @return if funds are equal
+     */
     @Override
     public boolean equals(Object another) {
         if(another == this) {

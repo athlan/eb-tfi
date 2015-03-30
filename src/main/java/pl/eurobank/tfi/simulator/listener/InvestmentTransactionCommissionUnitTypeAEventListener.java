@@ -6,8 +6,18 @@ import pl.eurobank.tfi.component.investmentfundwallet.domain.InvestmentTransacti
 import pl.eurobank.tfi.component.investmentfundwallet.domain.event.InvestmentTransactionEvent;
 import pl.eurobank.tfi.simulator.domain.investmentfund.UnitTypeA;
 
+/**
+ * This class defines functionality of charging commission while
+ * buying UnitTypeA.
+ *
+ */
 public class InvestmentTransactionCommissionUnitTypeAEventListener {
 
+    /**
+     * Method triggered wile event occurs.
+     *
+     * @param event
+     */
     @Subscribe
     public void recordInvestmentTransactionEvent(InvestmentTransactionEvent event) {
         if (event.getType() != InvestmentTransactionEvent.Type.PRE) {
