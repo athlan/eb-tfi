@@ -13,7 +13,6 @@ import pl.eurobank.tfi.component.investmentfundwallet.repository.exception.Trans
 import pl.eurobank.tfi.component.investmentfundwallet.repository.exception.TransactionNotEnoughUnitsQuantityInWalletException;
 import pl.eurobank.tfi.component.money.domain.Price;
 import pl.eurobank.tfi.component.money.domain.PriceInterface;
-import pl.eurobank.tfi.simulator.listener.InvestmentTransactionEventListener;
 
 import java.util.Arrays;
 import java.util.Currency;

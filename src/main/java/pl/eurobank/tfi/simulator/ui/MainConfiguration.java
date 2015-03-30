@@ -62,11 +62,23 @@ public class MainConfiguration {
         InvestmentFundInterface entity;
 
         price = new Price(100, Currency.getInstance("PLN"));
-        entity = new InvestmentFund("Fund 1", price);
+        entity = new InvestmentFund("Fundusz rynku pienieznego", price);
         repository.save(entity);
 
         price = new Price(100, Currency.getInstance("PLN"));
-        entity = new InvestmentFund("Fund 2", price);
+        entity = new InvestmentFund("Fundusz obligacji", price);
+        repository.save(entity);
+
+        price = new Price(100, Currency.getInstance("PLN"));
+        entity = new InvestmentFund("Fundusz stabilnego wzrostu", price);
+        repository.save(entity);
+
+        price = new Price(100, Currency.getInstance("PLN"));
+        entity = new InvestmentFund("Fundusz zrownowazony", price);
+        repository.save(entity);
+
+        price = new Price(100, Currency.getInstance("PLN"));
+        entity = new InvestmentFund("Fundusz akcji", price);
         repository.save(entity);
 
         return repository;
@@ -85,21 +97,47 @@ public class MainConfiguration {
 
         InvestmentFundInterface entity;
 
-        entity = investmentFundRepository.getById("Fund 1");
-        if(null != entity) {
+        entity = investmentFundRepository.getById("Fundusz rynku pienieznego");if(null != entity) {
             generator.generators.put(entity,
                     new RangeButNotUnderZeroInvestmentFundPriceGenerator(
-                            new Price(-5, Currency.getInstance("PLN")),
-                            new Price(10, Currency.getInstance("PLN"))
+                            new Price(-0.05, Currency.getInstance("PLN")),
+                            new Price(0.40, Currency.getInstance("PLN"))
                     ));
         }
 
-        entity = investmentFundRepository.getById("Fund 2");
+        entity = investmentFundRepository.getById("Fundusz obligacji");
         if(null != entity) {
             generator.generators.put(entity,
                     new RangeButNotUnderZeroInvestmentFundPriceGenerator(
-                            new Price(-100, Currency.getInstance("PLN")),
-                            new Price(5, Currency.getInstance("PLN"))
+                            new Price(-0.15, Currency.getInstance("PLN")),
+                            new Price(0.60, Currency.getInstance("PLN"))
+                    ));
+        }
+
+        entity = investmentFundRepository.getById("Fundusz stabilnego wzrostu");
+        if(null != entity) {
+            generator.generators.put(entity,
+                    new RangeButNotUnderZeroInvestmentFundPriceGenerator(
+                            new Price(-0.65, Currency.getInstance("PLN")),
+                            new Price(0.85, Currency.getInstance("PLN"))
+                    ));
+        }
+
+        entity = investmentFundRepository.getById("Fundusz zrownowazony");
+        if(null != entity) {
+            generator.generators.put(entity,
+                    new RangeButNotUnderZeroInvestmentFundPriceGenerator(
+                            new Price(-0.80, Currency.getInstance("PLN")),
+                            new Price(0.96, Currency.getInstance("PLN"))
+                    ));
+        }
+
+        entity = investmentFundRepository.getById("Fundusz akcji");
+        if(null != entity) {
+            generator.generators.put(entity,
+                    new RangeButNotUnderZeroInvestmentFundPriceGenerator(
+                            new Price(-1.00, Currency.getInstance("PLN")),
+                            new Price(1.10, Currency.getInstance("PLN"))
                     ));
         }
 
